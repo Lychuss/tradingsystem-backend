@@ -2,12 +2,7 @@ import bcrypt from 'bcrypt';
 
 export const checkIfSlsu = (username) => {
     const seperate = username.split('@')[1];
-
-    if(seperate !== 'slsu.edu.ph') {
-        return false;
-    }
-
-    return true;
+    return seperate === 'slsu.edu.ph';
 }
 
 export const checkStudentId = (studentId) => {

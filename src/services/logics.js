@@ -30,11 +30,8 @@ export async function checkEmailAvail(username) {
 export async function checkPassword(email, origPassword){
     const data = await checkEmail(email);
 
+    if (!data || data.rowCount === 0) return false;
     const rows = data.rows[0];
-
-    if(data.rowCount === 0){
-        return false;
-    }
 
     const hashPassword = rows.passwords;
 
@@ -51,9 +48,10 @@ export async function generateToken(email){
 
     const data = await getUserId(email);
 
+    if (!data || data.rowCount === 0) return false;
     const rows = data.rows[0];
 
     const studentId = rows.student_id;
 
-    return createToken(studentId);
+    return createToken(studentId, email);
 }

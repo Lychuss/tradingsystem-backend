@@ -15,16 +15,16 @@ export const checkStudentId = (studentId) => {
     const grade = studentId.split('')[1];
     
     switch(grade){
-        case '5': return {grade: '1', boolean: true, id: studentId }; break;
-        case '4': return {grade: '2', boolean: true, id: studentId }; break;
-        case '3': return {grade: '3', boolean: true, id: studentId }; break;
-        case '2': return {grade: '4', boolean: true, id: studentId }; break;
+        case '5': return {grade: '1', boolean: true, id: studentId };
+        case '4': return {grade: '2', boolean: true, id: studentId };
+        case '3': return {grade: '3', boolean: true, id: studentId };
+        case '2': return {grade: '4', boolean: true, id: studentId };
+        default: return { grade: null, isValid: false, id: studentId};
     }
 }
 
 export const hashPass = async (password) => {
-    const bcryptPass = await bcrypt.genSalt(10);
-    return bcrypt.hash(password, bcryptPass);
+    return bcrypt.hash(password, 10);
 }
 
 export const encryption = async (hashPassword, origPassword) => {

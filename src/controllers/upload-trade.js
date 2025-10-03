@@ -9,26 +9,27 @@ const uploadTradeRouter = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 uploadTradeRouter.post('/yes4trade/upload-trade', authenticated, upload.single('image'), async (req, res) => {
-    console.log(req.body);
     const { title, methods, email, studentId, program, type, requirement} = req.body;
 
     if(!req.file){
-        return res.status(404).json({ message: 'Error req file is undefined or empty'});
+        return res.status(400).json({ message: 'Error req file is undefined or empty'});
     }
 
     const {method_id, program_id, type_id} = await createPostProduct(methods, program, type);
 
        const stream = cloudinary.uploader.upload_stream({ folder: 'yes4trade' }, 
        async (error, result) => {
-           if (error) {
-               return res.status(500).json({ message: 'Invalid input of products!' });
-           }
+        
+          if (error) {
+             console.error(error);
+             return res.status(500).json({ message: "Image upload failed", error });
+          }
 
           try {
             await postProductTrade(title, requirement, result.secure_url, method_id, studentId, program_id, type_id, email);
             return res.status(200).json({ message: 'Image uploaded successfully', url: result.secure_url });
           } catch(err){
-             return res.status(500).json({ message: 'Invalid input of products!' });
+             return res.status(500).json({ message: "Database error: could not save product" });
           }
            
        });

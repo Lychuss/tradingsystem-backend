@@ -3,10 +3,6 @@
 # Node modules
 node_modules/
 
-# Cloudinary configuration
-src/utils/cloudinary.js
-
-
 # Local environment variables (Next.js style)
 .env.local
 

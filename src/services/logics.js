@@ -3,16 +3,22 @@ import { checkEmail, getUserId } from '../repository/userRepository.js';
 import { encryption } from '../utils/help.js'
 import { createToken } from '../middlewares/authentication.js';
 
-export async function createPostProduct(methods, program, type){
+export async function createPostProduct(methods, program, type, email){
     const data1 = await getMethodId(methods);
     const data2 = await getProgramId(program);
     const data3 = await getTypeId(type);
+    const data4 = await getStudentId(email);
+
+    if(!data1 || data1.rowCount === 0 && !data2 || data2.rowCount === 0 &&
+       !data3 || data3.rowCount === 0 && !data4|| data4.rowCount === 0
+     ) throw new Error('Error at getting all the value for creating a post product!');
 
     const method_id = data1.rows[0].method_id;
     const program_id = data2.rows[0].program_id;
     const type_id = data3.rows[0].type_id;
+    const student_id = data4.rows[0].student_id;
 
-    return {method_id, program_id, type_id};
+    return {method_id, program_id, type_id, student_id};
 }
 
 export async function checkEmailAvail(username) {

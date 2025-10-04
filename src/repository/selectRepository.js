@@ -11,3 +11,7 @@ export async function getTypeId(type) {
 export async function getMethodId(method) {
     return await pool.query('SELECT method_id FROM methods WHERE methods = $1', [method]);
 }
+
+export async function getStudentId(email){
+    return await pool.query('SELECT users.student_id FROM users WHERE users.email = $1', [email]);
+}

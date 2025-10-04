@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllPost } from '/tradingsystem-backend/src/repository/itemsRepository.js';
+import { getAllPost } from '../repository/itemsRepository.js';
 import { authenticated } from '../middlewares/authentication.js';
 
 const itemsRouter = express.Router();

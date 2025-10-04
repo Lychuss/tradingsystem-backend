@@ -1,4 +1,4 @@
-import { pool } from '/tradingsystem-backend/src/database/database.js';
+import { pool } from '../database/database.js';
 
 //should be fix the syntax of database for getting the books only
 export async function getBooks() {

@@ -1,4 +1,4 @@
-import { pool } from '/tradingsystem-backend/src/database/database.js';
+import { pool } from '../database/database.js';
 
 export const checkEmail = (email) => {
     console.log(email);

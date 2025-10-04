@@ -16,7 +16,7 @@ CREATE TABLE trading_products (
 	url VARCHAR(225),
 	price Decimal(10,2),
 	methods INT References methods(method_id),
-	student_id INT References users(student_id),
+	student_id TEXT References users(student_id),
 	program INT References programs(program_id),
 	type INT References types(type_id),
 	location VARCHAR(225)

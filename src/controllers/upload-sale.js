@@ -3,7 +3,7 @@ import multer from 'multer';
 import cloudinary from '../utils/cloudinary.js';
 import { postProductSell } from '../repository/uploadRepository.js';
 import { createPostProduct } from '../services/logics.js';
-import { authenticated } from '../middlewares/authentication.js';
+import { authenticated, getEmail } from '../middlewares/authentication.js';
 
 const uploadSellRouter = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -11,11 +11,13 @@ const upload = multer({ storage: multer.memoryStorage() });
 uploadSellRouter.post('/yes4trade/upload-sell', authenticated, upload.single('image'), async (req, res) => {
     const { title, methods, email, location, program, type, price } = req.body;
 
+    const username = await getEmail(req.headers['authorization'].split(' ')[1]);
+
     if (!req.file) {
         return res.status(400).json({ message: 'Error: req.file is undefined or empty' });
     }
 
-    const { method_id, program_id, type_id, student_id } = await createPostProduct(methods, program, type, email);
+    const { method_id, program_id, type_id, student_id } = await createPostProduct(methods, program, type, username);
 
     const stream = cloudinary.uploader.upload_stream({ folder: 'yes4trade' }, 
         async (error, result) => {

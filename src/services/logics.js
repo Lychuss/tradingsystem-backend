@@ -1,4 +1,4 @@
-import {getMethodId, getProgramId, getTypeId} from '../repository/selectRepository.js';
+import {getMethodId, getProgramId, getTypeId, getStudentId} from '../repository/selectRepository.js';
 import { checkEmail, getUserId } from '../repository/userRepository.js';
 import { encryption } from '../utils/help.js'
 import { createToken } from '../middlewares/authentication.js';

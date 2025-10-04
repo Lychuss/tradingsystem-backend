@@ -33,7 +33,8 @@ export const authenticated = (req, res, next) => {
         const timeExpiration = decode.exp - currentTime;
 
         if(timeExpiration < 360){
-            req.token = createToken(decode.studentId, decode.email);
+            const newToken = createToken(decode.studentId, decode.email);
+            res.setHeader('x-refresh-token', newToken);
         }
 
         req.user = decode;

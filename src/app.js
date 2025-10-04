@@ -10,7 +10,14 @@ import cors from 'cors';
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
-app.use(cors({ origin: '*' }));
+app.use(cors({
+  origin: [
+    "http://localhost:3000", 
+    "https://tradingsystem-frontend-lnyhwf221.vercel.app" 
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));app.use(cors({ origin: '*' }));
 
 app.use(express.json());
 

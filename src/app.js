@@ -12,12 +12,15 @@ const upload = multer({ dest: 'uploads/' });
 
 app.use(cors({
   origin: [
-    "http://localhost:3000", 
-    "https://tradingsystem-frontend-lnyhwf221.vercel.app" 
+    "http://localhost:3000",
+    "https://tradingsystem-frontend.vercel.app" 
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
+
+app.options('*', cors());
 
 app.use(express.json());
 

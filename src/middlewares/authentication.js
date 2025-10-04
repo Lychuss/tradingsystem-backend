@@ -27,7 +27,15 @@ export const authenticated = (req, res, next) => {
 
     jwt.verify(token, process.env.SECRET_KEY, (err, decode) => {
         if(err) return res.status(401).json({message: 'Invalid or expired token'});
-        console.log(decode.exp);
+
+        const currentTime = Math.floor(Date.now() / 1000);
+        
+        const timeExpiration = decode.exp - currentTime;
+
+        if(timeExpiration < 360){
+            req.token = createToken(decode.studentId, decode.email);
+        }
+
         req.user = decode;
         next();
     });

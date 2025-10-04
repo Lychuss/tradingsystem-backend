@@ -45,3 +45,18 @@ INSERT INTO programs (programs) VALUES ('CIT'), ('CABHA'), ('CEN'), ('CAS'), ('C
 INSERT INTO types (types) VALUES ('Book'), ('Notes'), ('Uniforms');
 
 INSERT INTO users VALUES ('24L-00021', 'raphael mharcus', 'san juan', '2', 'CEN', 'rap@slsu.edu.ph', 'leesingripex');
+
+INSERT INTO trading_products (
+  product_id, title, requirements, url, price, methods, student_id, program, type, location
+) VALUES (
+  10,
+  'biology notes 2',
+  'dadwadawdsagasgasgsagwawa',
+  'https://res.cloudinary.com/dkacxbbwh/image/upload/v1759571757/yes4trade/yhbx4w8ggh5u7umi7b2l.jpg',
+  NULL,
+  1,
+  '24L-00021',
+  4,
+  2,
+  'near the slsu'
+);

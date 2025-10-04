@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import { checkPassword } from "../services/logics.js";
 import { checkIfSlsu } from "../utils/help.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const createToken = (student_id, email) => {
     const payLoad = {studentId: student_id, email: email};
@@ -50,6 +52,7 @@ export const registration = async (req, res, next) => {
 
         next();
     } catch (err) {
+        console.error(err);
         return res.status(500).json({ message: 'Server error during authentication.' });
     }
 };

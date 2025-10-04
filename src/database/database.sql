@@ -1,6 +1,6 @@
 /* Create all needed tables for database */
 CREATE TABLE users (
-	student_id int PRIMARY KEY,
+	student_id VARCHAR(9) PRIMARY KEY,
 	first_name VARCHAR(225),
 	last_name VARCHAR(225),
 	grade_level VARCHAR(225),
@@ -8,8 +8,6 @@ CREATE TABLE users (
 	email VARCHAR(225),
 	passwords VARCHAR
 );
-
-INSERT INTO users VALUES (2422313, 'rapha', 'san juan', '2ndyear', 'cen', 'raphaelsa@gmail.com', 'asdawda');
 
 CREATE TABLE trading_products (
 	product_id BIGSERIAL PRIMARY KEY,
@@ -20,7 +18,8 @@ CREATE TABLE trading_products (
 	methods INT References methods(method_id),
 	student_id INT References users(student_id),
 	program INT References programs(program_id),
-	type INT References types(type_id)
+	type INT References types(type_id),
+	location VARCHAR(225)
 );
 
 CREATE TABLE methods (
@@ -44,3 +43,5 @@ INSERT INTO methods (methods) VALUES ('Trade'), ('Sell');
 INSERT INTO programs (programs) VALUES ('CIT'), ('CABHA'), ('CEN'), ('CAS'), ('CAM'), ('CAG'), ('CTE');
 
 INSERT INTO types (types) VALUES ('Book'), ('Notes'), ('Uniforms');
+
+INSERT INTO users VALUES ('24L-00021', 'raphael mharcus', 'san juan', '2', 'CEN', 'rap@slsu.edu.ph', 'leesingripex');

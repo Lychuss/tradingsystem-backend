@@ -9,11 +9,9 @@ export async function createPostProduct(methods, program, type, email){
     const data3 = await getTypeId(type);
     const data4 = await getStudentId(email);
 
-    console.log(data3);
+    const data = [data1, data2, data3, data4];
 
-    if(!data1 || data1.rowCount === 0 || !data2 || data2.rowCount === 0 ||
-       !data3 || data3.rowCount === 0 || !data4 || data4.rowCount === 0
-     ) throw new Error('Error at getting all the value for creating a post product!');
+    if(data.some(d => !d || d.rowCount === 0)) throw new Error('Error at getting all the value for creating a post product!');
 
     const method_id = data1.rows[0].method_id;
     const program_id = data2.rows[0].program_id;

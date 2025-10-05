@@ -62,3 +62,8 @@ INSERT INTO trading_products (
   'rap@gmail.com',
   'near the slsu'
 );
+
+/* Update values inside of the database */
+UPDATE types SET types = 'Uniform' WHERE type_id = 3;
+
+UPDATE types SET types = 'Books' WHERE type_id = 1;

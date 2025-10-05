@@ -11,8 +11,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 uploadTradeRouter.post('/yes4trade/upload-trade', authenticated, upload.single('image'), async (req, res) => {
     const { title, methods, email, location, program, type, requirement} = req.body;
 
-    console.log(type);
-
     const username = await getEmail(req.headers['authorization'].split(' ')[1]);
 
     if(!req.file){
@@ -34,7 +32,7 @@ uploadTradeRouter.post('/yes4trade/upload-trade', authenticated, upload.single('
             return res.status(200).json({ message: 'Image uploaded successfully', url: result.secure_url });
           } catch(err){
             console.error(err);
-             return res.status(500).json({ message: "Database error: could not save product" });
+            return res.status(500).json({ message: "Database error: could not save product" });
           }
            
        });

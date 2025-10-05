@@ -11,6 +11,8 @@ const upload = multer({ storage: multer.memoryStorage() });
 uploadSellRouter.post('/yes4trade/upload-sell', authenticated, upload.single('image'), async (req, res) => {
     const { title, methods, email, location, program, type, price } = req.body;
 
+    console.log(type);
+
     const username = await getEmail(req.headers['authorization'].split(' ')[1]);
 
     if (!req.file) {

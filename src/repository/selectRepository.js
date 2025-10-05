@@ -5,6 +5,7 @@ export async function getProgramId(program) {
 }
 
 export async function getTypeId(type) {
+    console.log(type);
     return await pool.query('SELECT type_id FROM types WHERE types = $1', [type]);
 }
 

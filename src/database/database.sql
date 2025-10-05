@@ -19,6 +19,7 @@ CREATE TABLE trading_products (
 	student_id TEXT References users(student_id),
 	program INT References programs(program_id),
 	type INT References types(type_id),
+	email VARCHAR(225),
 	location VARCHAR(225)
 );
 
@@ -47,7 +48,7 @@ INSERT INTO types (types) VALUES ('Book'), ('Notes'), ('Uniforms');
 INSERT INTO users VALUES ('24L-00021', 'raphael mharcus', 'san juan', '2', 'CEN', 'rap@slsu.edu.ph', 'leesingripex');
 
 INSERT INTO trading_products (
-  product_id, title, requirements, url, price, methods, student_id, program, type, location
+  product_id, title, requirements, url, price, methods, student_id, program, type, email, location
 ) VALUES (
   10,
   'biology notes 2',
@@ -58,5 +59,6 @@ INSERT INTO trading_products (
   '24L-00021',
   4,
   2,
+  'rap@gmail.com',
   'near the slsu'
 );

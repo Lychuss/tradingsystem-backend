@@ -13,7 +13,7 @@ const upload = multer({ dest: 'uploads/' });
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://tradingsystem-frontend-g1qod4478.vercel.app" 
+    "https://tradingsystem-frontend.vercel.app" 
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],

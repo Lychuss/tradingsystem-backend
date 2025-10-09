@@ -2,6 +2,7 @@ import {getMethodId, getProgramId, getTypeId, getStudentId} from '../repository/
 import { checkEmail, getUserId } from '../repository/userRepository.js';
 import { encryption } from '../utils/help.js'
 import { createToken } from '../middlewares/authentication.js';
+import { getProducts } from '../repository/itemsRepository.js';
 
 export async function createPostProduct(methods, program, type, email){
     const data1 = await getMethodId(methods);
@@ -62,4 +63,14 @@ export async function generateToken(email){
     const studentId = rows.student_id;
 
     return createToken(studentId, email);
+}
+
+export async function getProduct(id){
+    const data = await getProducts(id);
+
+    if(!data || data.rowCount === 0) return null;
+
+    const product = data.rows[0];
+
+    return product;
 }

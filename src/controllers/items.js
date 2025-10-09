@@ -1,6 +1,7 @@
 import express from 'express';
 import { getAllPost } from '../repository/itemsRepository.js';
 import { authenticated } from '../middlewares/authentication.js';
+import { getProduct } from '../services/logics.js';
 
 const itemsRouter = express.Router();
 
@@ -10,10 +11,23 @@ itemsRouter.get('/yes4trade/products',authenticated , async (req, res) => {
     return res.status(200).json(books);
 });
 
-itemsRouter.get('/yes4trade/products/:productsId', authenticated, (req, res) => {
+itemsRouter.get('/yes4trade/products/:productsId', authenticated, async (req, res) => {
     const { id } = req.params;
 
-    
+    try {
+    const product = await getProduct;
+
+    console.log(product);
+
+    if(product === null){
+        return res.status(404).json({ message: 'Cannot get the product! Try Again!'});
+    }
+
+    return res.status(200).json(product);
+
+} catch(err) {
+        return res.status(500).json({ message: 'Error in the server!'});
+    } 
 });
 
 export default itemsRouter;

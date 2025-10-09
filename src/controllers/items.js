@@ -12,10 +12,10 @@ itemsRouter.get('/yes4trade/products',authenticated , async (req, res) => {
 });
 
 itemsRouter.get('/yes4trade/products/:productsId', authenticated, async (req, res) => {
-    const { id } = req.params;
+    const { productsId } = req.params;
 
     try {
-    const product = await getProduct;
+    const product = await getProduct(productsId);
 
     console.log(product);
 

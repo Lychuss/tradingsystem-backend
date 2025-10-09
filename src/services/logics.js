@@ -68,6 +68,8 @@ export async function generateToken(email){
 export async function getProduct(id){
     const data = await getProducts(id);
 
+    console.log(id);
+
     if(!data || data.rowCount === 0) return null;
 
     const product = data.rows[0];

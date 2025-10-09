@@ -5,3 +5,9 @@ export async function getAllPost(){
         `SELECT * FROM trading_products`
     );
 }
+
+export async function getProduct(id){
+    return await pool.query(
+        `SELECT * FROM trading_products WHERE product_id = $1`, [id]
+    );
+}

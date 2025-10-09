@@ -4,10 +4,16 @@ import { authenticated } from '../middlewares/authentication.js';
 
 const itemsRouter = express.Router();
 
-itemsRouter .get('/yes4trade/getbooks',authenticated , async (req, res) => {
+itemsRouter.get('/yes4trade/products',authenticated , async (req, res) => {
     const data = await getAllPost();
     const books  = data.rows;
     return res.status(200).json(books);
+});
+
+itemsRouter.get('/yes4trade/products/:productsId', authenticated, (req, res) => {
+    const { id } = req.params;
+
+    
 });
 
 export default itemsRouter;

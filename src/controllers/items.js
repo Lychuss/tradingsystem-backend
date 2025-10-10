@@ -23,6 +23,8 @@ itemsRouter.get('/yes4trade/products/:productsId', authenticated, async (req, re
         return res.status(404).json({ message: 'Cannot get the product! Try Again!'});
     }
 
+    console.log(product);
+
     return res.status(200).json(product);
 
 } catch(err) {

@@ -76,3 +76,15 @@ export async function getProduct(id){
 
     return product;
 }
+
+export async function getStudentsId(email){
+    const data = await getStudentId(email);
+
+    if(!data || data.rowCount === 0){
+        return null;
+    }
+
+    const student_id = data.rows[0];
+
+    return student_id;
+}

@@ -4,6 +4,7 @@ import uploadSellRouter from "./controllers/upload-sale.js";
 import itemsRouter from "./controllers/items.js";
 import loginRouter from './controllers/login.js';
 import signupRouter from './controllers/signup.js';
+import emailRouter from './controllers/email.js';
 import multer from 'multer';
 import cors from 'cors';
 
@@ -27,6 +28,7 @@ app.use("/", uploadSellRouter);
 app.use("/", itemsRouter);
 app.use("/", loginRouter);
 app.use("/", signupRouter);
+app.use("/", emailRouter);
 
 app.listen(5000, () => {
     console.log('Server listening to port 5000');

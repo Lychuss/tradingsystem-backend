@@ -26,7 +26,7 @@ export const authenticated = (req, res, next) => {
     if(!token) return res.status(401).json({message: 'You must have a token!'});
 
     jwt.verify(token, process.env.SECRET_KEY, (err, decode) => {
-        if(err) return res.status(401).json({message: 'Invalid or expired token'});
+        if(err) return res.status(401).json({ message: 'Invalid or expired token', expired: true });
 
         const currentTime = Math.floor(Date.now() / 1000);
         

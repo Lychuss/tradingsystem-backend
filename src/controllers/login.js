@@ -15,7 +15,7 @@ loginRouter.post('/yes4trade/auth/login',registration , async (req, res) => {
         const student_id = await getStudentsId(username);
 
         if(token){
-            return res.status(200).json({ token: token, student_id });
+            return res.status(200).json({ token: token, student_id, expired: false });
         }
             return res.status(400).json({ message: 'Error account not valid!'});
 

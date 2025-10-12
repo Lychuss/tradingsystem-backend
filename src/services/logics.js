@@ -84,7 +84,7 @@ export async function getStudentsId(email){
         return null;
     }
 
-    const student_id = data.rows[0];
+    const student_id = data.rows[0].student_id;
 
     return student_id;
 }

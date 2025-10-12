@@ -1,7 +1,7 @@
 import express from 'express';
 import { getAllPost } from '../repository/itemsRepository.js';
 import { authenticated } from '../middlewares/authentication.js';
-import { getProduct } from '../services/logics.js';
+import { getProduct, getAllSell } from '../services/logics.js';
 
 const itemsRouter = express.Router();
 
@@ -30,6 +30,17 @@ itemsRouter.get('/yes4trade/products/:productsId', authenticated, async (req, re
 } catch(err) {
         return res.status(500).json({ message: 'Error in the server!'});
     } 
+});
+
+itemsRouter.get('yes4trade/products/sells', authenticated, async (req, res) => {
+    const data = await getAllSell();
+
+    if(data === null){
+        return res.status(401).json({message: 'Error not able to show all the sells product!'});
+    }
+
+    return res.status(200).json({ data, message: 'Successfully get all the needed products!'});
+
 });
 
 export default itemsRouter;

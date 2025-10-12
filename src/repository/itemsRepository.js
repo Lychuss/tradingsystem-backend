@@ -15,3 +15,9 @@ export async function getProducts(id){
          WHERE product_id = $1`, [id]
     );
 }
+
+export async function getAllSells(){
+    return await pool.query(
+        `SELECT * FROM trading_products WHERE methods = 2`
+    )
+}

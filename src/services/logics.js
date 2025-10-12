@@ -2,7 +2,7 @@ import {getMethodId, getProgramId, getTypeId, getStudentId} from '../repository/
 import { checkEmail, getUserId } from '../repository/userRepository.js';
 import { encryption } from '../utils/help.js'
 import { createToken } from '../middlewares/authentication.js';
-import { getProducts } from '../repository/itemsRepository.js';
+import { getProducts, getAllSells } from '../repository/itemsRepository.js';
 
 export async function createPostProduct(methods, program, type, email){
     const data1 = await getMethodId(methods);
@@ -87,4 +87,16 @@ export async function getStudentsId(email){
     const student_id = data.rows[0].student_id;
 
     return student_id;
+}
+
+export async function getAllSell(){
+    const data = await getAllSells();
+
+    if(!data || data.rowCount === 0){
+        return null;
+    }
+
+    console.log(data);
+
+    return data;
 }

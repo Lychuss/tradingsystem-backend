@@ -21,3 +21,10 @@ export async function getAllSells(){
         `SELECT * FROM trading_products WHERE methods = 2`
     )
 }
+
+
+export async function getAllTrades(){
+    return await pool.query(
+        `SELECT * FROM trading_products WHERE methods = 1`
+    )
+}

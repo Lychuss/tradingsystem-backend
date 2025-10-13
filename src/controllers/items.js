@@ -32,9 +32,10 @@ itemsRouter.get('/yes4trade/products/:productsId', authenticated, async (req, re
     } 
 });
 
-itemsRouter.get('/yes4trade/products/sells', authenticated, async (req, res) => {
+itemsRouter.get('/yes4trade/sells/products', authenticated, async (req, res) => {
     try { 
     const data = await getAllSell();
+    console.log(data);
     if(data === null){
         return res.status(401).json({message: 'Error not able to show all the sells product!'});
     }
@@ -42,7 +43,6 @@ itemsRouter.get('/yes4trade/products/sells', authenticated, async (req, res) => 
     return res.status(200).json({ data, message: 'Successfully get all the needed products!'});
 
     } catch(err){
-        console.log(err);
         return res.status(500).json({ message: 'Error in the server!'});
     }
 

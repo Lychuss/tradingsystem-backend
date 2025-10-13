@@ -92,8 +92,6 @@ export async function getStudentsId(email){
 export async function getAllSell(){
     const data = await getAllSells();
 
-    console.log(data);
-
     if(!data || data.rowCount === 0){
         return null;
     }

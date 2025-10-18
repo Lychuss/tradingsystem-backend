@@ -58,10 +58,13 @@ itemsRouter.get('/yes4trade/trades/products', authenticated, async (req, res) =>
     }
 });
 
-itemsRouter.get('/yes4trade/filter/:productType/products', authenticated, async (req, res) => {
+itemsRouter.get('/yes4trade/filter/:type/products', authenticated, async (req, res) => {
+    const { type } = req.params;
+
     try { 
-        const { type } = req.params;
          let data;
+
+         console.log(type);
 
         switch(type){
             case 'books':

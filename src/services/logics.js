@@ -2,7 +2,7 @@ import {getMethodId, getProgramId, getTypeId, getStudentId} from '../repository/
 import { checkEmail, getUserId } from '../repository/userRepository.js';
 import { encryption } from '../utils/help.js'
 import { createToken } from '../middlewares/authentication.js';
-import { getProducts, getAllSells, getAllTrades, getAllBooks, getAllNotes} from '../repository/itemsRepository.js';
+import { getProducts, getAllSells, getAllTrades, getAllBooks, getAllNotes, getAllUniforms} from '../repository/itemsRepository.js';
 
 export async function createPostProduct(methods, program, type, email){
     const data1 = await getMethodId(methods);
@@ -115,6 +115,16 @@ export async function getAllBook(){
 
 export async function getAllNote(){
     const data = await getAllNotes();
+
+    if(!data || data.rowCount === 0){
+        return null;
+    }
+
+    return data.rows;
+}
+
+export async function getAllUniform(){
+    const data = await getAllUniforms();
 
     if(!data || data.rowCount === 0){
         return null;

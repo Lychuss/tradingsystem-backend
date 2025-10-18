@@ -1,7 +1,7 @@
 import express from 'express';
 import { getAllPost } from '../repository/itemsRepository.js';
 import { authenticated } from '../middlewares/authentication.js';
-import { getProduct, getAllSell, getAllTrade, getAllBook, getAllNote } from '../services/logics.js';
+import { getProduct, getAllSell, getAllTrade, getAllBook, getAllNote, getAllUniform } from '../services/logics.js';
 
 const itemsRouter = express.Router();
 

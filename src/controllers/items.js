@@ -1,7 +1,7 @@
 import express from 'express';
 import { getAllPost } from '../repository/itemsRepository.js';
 import { authenticated } from '../middlewares/authentication.js';
-import { getProduct, getAllSell, getAllTrade, getAllBook } from '../services/logics.js';
+import { getProduct, getAllSell, getAllTrade, getAllBook, getAllNote } from '../services/logics.js';
 
 const itemsRouter = express.Router();
 
@@ -58,9 +58,23 @@ itemsRouter.get('/yes4trade/trades/products', authenticated, async (req, res) =>
     }
 });
 
-itemsRouter.get('/yes4trade/books/products', authenticated, async (req, res) => {
+itemsRouter.get('/yes4trade/filter/:productType/products', authenticated, async (req, res) => {
     try { 
-        const data = await getAllBook();
+        const { type } = req.params;
+         let data;
+
+        switch(type){
+            case 'books':
+                data = await getAllBook();
+                break;
+            case 'notes':
+                data = await getAllNote();
+                break;
+            case 'uniforms':
+                data = await getAllUniform();
+                break;
+            default: data = null;
+        }
 
         if(data === null){
             return res.status(401).json({message: 'Error not able to show all the sells product!'});

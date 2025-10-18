@@ -33,3 +33,9 @@ export async function getAllBooks(){
         `SELECT * FROM trading_products WHERE type = 1`
     )
 }
+
+export async function getAllNotes(){
+        return await pool.query(
+        `SELECT * FROM trading_products WHERE type = 2`
+    )
+}

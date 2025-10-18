@@ -69,6 +69,7 @@ itemsRouter.get('/yes4trade/books/products', authenticated, async (req, res) => 
         return res.status(200).json({ data, message: 'Successfully get all the needed products!'});
 
     } catch(err){
+        console.error(err);
         return res.status(500).json({ message: 'Error in the server!'});
     }
 });

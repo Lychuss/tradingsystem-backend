@@ -30,6 +30,6 @@ export async function getAllTrades(){
 
 export async function getAllBooks(){
         return await pool.query(
-        `SELECT * FROM trading_products WHERE types = 1`
+        `SELECT * FROM trading_products WHERE type = 1`
     )
 }

@@ -2,7 +2,7 @@ import {getMethodId, getProgramId, getTypeId, getStudentId} from '../repository/
 import { checkEmail, getUserId } from '../repository/userRepository.js';
 import { encryption } from '../utils/help.js'
 import { createToken } from '../middlewares/authentication.js';
-import { getProducts, getAllSells, getAllTrades } from '../repository/itemsRepository.js';
+import { getProducts, getAllSells, getAllTrades, getAllBooks } from '../repository/itemsRepository.js';
 
 export async function createPostProduct(methods, program, type, email){
     const data1 = await getMethodId(methods);
@@ -19,15 +19,11 @@ export async function createPostProduct(methods, program, type, email){
     const type_id = data3.rows[0].type_id;
     const student_id = data4.rows[0].student_id;
 
-    console.log(type_id);
-
     return {method_id, program_id, type_id, student_id};
 }
 
 export async function checkEmailAvail(username) {
     const data = await checkEmail(username);
-
-    console.log(data);
 
     if(data.rowCount !== 0){
         return false;
@@ -68,8 +64,6 @@ export async function generateToken(email){
 export async function getProduct(id){
     const data = await getProducts(id);
 
-    console.log(id);
-
     if(!data || data.rowCount === 0) return null;
 
     const product = data.rows[0];
@@ -96,8 +90,6 @@ export async function getAllSell(){
         return null;
     }
 
-    console.log(data);
-
     return data.rows;
 }
 
@@ -108,7 +100,15 @@ export async function getAllTrade(){
         return null;
     }
 
-    console.log(data);
+    return data.rows;
+}
+
+export async function getAllBook(){
+    const data = await getAllBooks();
+
+    if(!data || data.rowCount === 0){
+        return null;
+    }
 
     return data.rows;
 }

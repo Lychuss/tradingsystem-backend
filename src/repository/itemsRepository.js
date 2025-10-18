@@ -22,9 +22,14 @@ export async function getAllSells(){
     )
 }
 
-
 export async function getAllTrades(){
     return await pool.query(
         `SELECT * FROM trading_products WHERE methods = 1`
+    )
+}
+
+export async function getAllBooks(){
+        return await pool.query(
+        `SELECT * FROM trading_products WHERE types = 1`
     )
 }

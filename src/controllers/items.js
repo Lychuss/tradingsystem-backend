@@ -64,8 +64,6 @@ itemsRouter.get('/yes4trade/filter/:type/products', authenticated, async (req, r
     try { 
          let data;
 
-         console.log(type);
-
         switch(type){
             case 'books':
                 data = await getAllBook();

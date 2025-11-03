@@ -4,10 +4,6 @@ import { generateToken, getStudentsId } from "../services/logics.js";
 
 const loginRouter = express.Router();
 
-loginRouter.get('/yes4trade/auth/login', (req, res) => {
-   return res.send('Hello what sup!');
-})
-
 loginRouter.post('/yes4trade/auth/login',registration , async (req, res) => {
     const { username } = req.body;
     try {

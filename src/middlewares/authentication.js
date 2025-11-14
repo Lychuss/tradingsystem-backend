@@ -62,6 +62,7 @@ export const registration = async (req, res, next) => {
 
         next();
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ message: 'Server error during authentication.' });
     }
 };

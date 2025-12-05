@@ -10,7 +10,11 @@ export async function createPostProduct(methods, program, type, email){
     const data3 = await getTypeId(type);
     const data4 = await getStudentId(email);
 
+    console.log(type);
+
     const data = [data1, data2, data3, data4];
+
+    console.log(data);
 
     if(data.some(d => !d || d.rowCount === 0)) throw new Error('Error at getting all the value for creating a post product!');
 

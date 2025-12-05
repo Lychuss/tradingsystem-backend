@@ -7,25 +7,25 @@ configDotenv();
 const emailRouter = express.Router();
 
 emailRouter.post('/yes4trade/products/send-email', authenticated, async (req, res) => {
-    const { to, from, message} = req.body;
+  const { to, from, message } = req.body;
 
-      try {
-        const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT,                   
-        secure: true,                
-        auth: {
-            user: process.env.SMTP_USER, 
-            pass: process.env.SMTP_PASSWORD,      
-        },
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      secure: false,                     // FIXED — must be false for port 587
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD, // must be SMTP KEY
+      },
     });
 
     const mailOptions = {
-      from: `"YES4TRADE" raphaelsanjuan6@gmail.com`,
-      to: to,
+      from: `"YES4TRADE" <${process.env.SMTP_USER}>`, // FIXED
+      to,
       subject: "YES4TRADE",
       text: message,
-      replyTo: from, 
+      replyTo: from,
     };
 
     await transporter.sendMail(mailOptions);

@@ -53,9 +53,10 @@ export async function deleteItem(id){
     );
 }
 
-export async function updateItem(id, requirements){
+export async function updateItem(id, requirement, title, methods, email, location, program, type, price){
     return await pool.query(
-        `UPDATE trading_products SET requirements = $1 WHERE product_id = $2`, 
-        [id, requirements]
+        `UPDATE trading_products SET title = $1, requirements = $2, price = $3, methods = $4, 
+        program = $5, type = $6, email = $7, location = $8  WHERE product_id = $9`, 
+        [title, requirement, price, methods, program, type, email, location, id]
     );
 }

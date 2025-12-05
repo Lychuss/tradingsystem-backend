@@ -48,10 +48,10 @@ itemsRouter.delete('/yes4trade/products/:productsId', authenticated, async (req,
 
 itemsRouter.put('/yes4trade/products/:productsId', authenticated, async (req, res) => {
     const { productsId } = req.params;
-    const { requirements } = req.body;
+    const { requirement, title, methods, email, location, program, type, price } = req.body;
 
     try {
-    const product = await updateItem(productsId, requirements);
+    const product = await updateItem(productsId, requirement, title, methods, email, location, program, type, price);
 
     if(product === null){
         return res.status(404).json({ message: 'Cannot get the product! Try Again!'});
@@ -60,6 +60,7 @@ itemsRouter.put('/yes4trade/products/:productsId', authenticated, async (req, re
     return res.status(200).json({ message: 'Updated successfully!'});
 
 } catch(err) {
+        console.log(err);
         return res.status(500).json({ message: 'Error in the server!'});
     } 
 });

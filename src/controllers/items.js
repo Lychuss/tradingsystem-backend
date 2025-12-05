@@ -41,6 +41,7 @@ itemsRouter.delete('/yes4trade/products/:productsId', authenticated, async (req,
     return res.status(200).json({message: 'You have successfully deleted the post'});
 
 } catch(err) {
+        console.log(err)
         return res.status(500).json({ message: 'Error in the server!'});
     } 
 });
@@ -75,6 +76,7 @@ itemsRouter.get('/yes4trade/sells/products', authenticated, async (req, res) => 
         return res.status(200).json({ data, message: 'Successfully get all the needed products!'});
 
     } catch(err){
+        console.log(err)
         return res.status(500).json({ message: 'Error in the server!'});
     }
 });

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllPost } from '../repository/itemsRepository.js';
+import { getAllPost, deleteItem, updateItem } from '../repository/itemsRepository.js';
 import { authenticated } from '../middlewares/authentication.js';
 import { getProduct, getAllSell, getAllTrade, getAllBook, getAllNote, getAllUniform } from '../services/logics.js';
 
@@ -27,6 +27,42 @@ itemsRouter.get('/yes4trade/products/:productsId', authenticated, async (req, re
         return res.status(500).json({ message: 'Error in the server!'});
     } 
 });
+
+itemsRouter.delete('/yes4trade/products/:productsId', authenticated, async (req, res) => {
+    const { productsId } = req.params;
+
+    try {
+    const product = await deleteItem(productsId);
+
+    if(product === null){
+        return res.status(404).json({ message: 'Cannot get the product! Try Again!'});
+    }
+
+    return res.status(200).json({message: 'You have successfully deleted the post'});
+
+} catch(err) {
+        return res.status(500).json({ message: 'Error in the server!'});
+    } 
+});
+
+itemsRouter.put('/yes4trade/products/:productsId', authenticated, async (req, res) => {
+    const { productsId } = req.params;
+    const { requirements } = req.body;
+
+    try {
+    const product = await updateItem(productsId, requirements);
+
+    if(product === null){
+        return res.status(404).json({ message: 'Cannot get the product! Try Again!'});
+    }
+
+    return res.status(200).json({ message: 'Updated successfully!'});
+
+} catch(err) {
+        return res.status(500).json({ message: 'Error in the server!'});
+    } 
+});
+
 
 itemsRouter.get('/yes4trade/sells/products', authenticated, async (req, res) => {
     try { 

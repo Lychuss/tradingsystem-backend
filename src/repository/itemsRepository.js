@@ -19,7 +19,7 @@ export async function getProducts(id){
 export async function getAllSells(){
     return await pool.query(
         `SELECT * FROM trading_products WHERE methods = 2`
-    )
+    );
 }
 
 export async function getAllTrades(){
@@ -31,7 +31,7 @@ export async function getAllTrades(){
 export async function getAllBooks(){
         return await pool.query(
         `SELECT * FROM trading_products WHERE type = 1`
-    )
+    );
 }
 
 export async function getAllNotes(){
@@ -43,5 +43,19 @@ export async function getAllNotes(){
 export async function getAllUniforms(){
         return await pool.query(
         `SELECT * FROM trading_products WHERE type = 3`
-    )
+    );
+}
+
+export async function deleteItem(id){
+    return await pool.query(
+        `DELETE FROM trading_products WHERE id = $1`,
+        [id]
+    );
+}
+
+export async function updateItem(id, requirements){
+    return await pool.query(
+        `UPDATE trading_products SET requirements = $1 WHERE product_id = $2`, 
+        [id, requirements]
+    );
 }

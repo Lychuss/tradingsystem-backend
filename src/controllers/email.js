@@ -1,6 +1,6 @@
 import express from 'express';
 import { authenticated } from '../middlewares/authentication.js';
-import nodemailer from 'nodemailer';
+import fetch from 'node-fetch';
 import { configDotenv } from 'dotenv';
 configDotenv();
 
@@ -10,27 +10,27 @@ emailRouter.post('/yes4trade/products/send-email', authenticated, async (req, re
   const { to, from, message } = req.body;
 
   try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: false,                     // FIXED — must be false for port 587
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD, // must be SMTP KEY
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': process.env.BREVO_API_KEY
       },
+      body: JSON.stringify({
+        sender: { name: "YES4TRADE", email: process.env.SMTP_USER },
+        to: [{ email: to }],
+        subject: "YES4TRADE",
+        textContent: message,
+        replyTo: { email: from }
+      })
     });
 
-    const mailOptions = {
-      from: `"YES4TRADE" <${process.env.SMTP_USER}>`, // FIXED
-      to,
-      subject: "YES4TRADE",
-      text: message,
-      replyTo: from,
-    };
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(err);
+    }
 
-    await transporter.sendMail(mailOptions);
-
-    res.json({ success: true, message: "Email sent successfully!" });
+    res.json({ success: true, message: "Email sent successfully via API!" });
   } catch (error) {
     console.error("Email error:", error);
     res.status(500).json({ success: false, message: "Failed to send email." });

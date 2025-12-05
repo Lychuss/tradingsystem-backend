@@ -48,7 +48,7 @@ export async function getAllUniforms(){
 
 export async function deleteItem(id){
     return await pool.query(
-        `DELETE FROM trading_products WHERE id = $1`,
+        `DELETE FROM trading_products WHERE product_id = $1`,
         [id]
     );
 }
